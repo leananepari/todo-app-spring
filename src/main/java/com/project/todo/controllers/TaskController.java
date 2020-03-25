@@ -4,9 +4,10 @@ import com.project.todo.models.Task;
 import com.project.todo.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -29,10 +30,27 @@ public class TaskController
         return taskRepository.getOne(id);
     }
 
-    @PostMapping
+    @PostMapping(value = "/add",
+                 consumes = {"application/json"},
+                 produces = {"application/json"})
     @ResponseStatus(HttpStatus.CREATED)
-    public Task create(@RequestBody final Task task)
+    public ResponseEntity<?> create(@RequestBody Task task) throws URISyntaxException
     {
-        return taskRepository.saveAndFlush(task);
+        task = taskRepository.save(task);
+        return new ResponseEntity<>(null,  HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/update")
+    public ResponseEntity<?> updateTask(@RequestBody Task task)
+    {
+        task = taskRepository.save(task);
+        return new ResponseEntity<>(null,  HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete/{taskId}")
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId)
+    {
+        taskRepository.deleteById(taskId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
