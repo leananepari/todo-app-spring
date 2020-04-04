@@ -1,7 +1,10 @@
 package com.project.todo.models;
 
+import com.project.todo.logging.Loggable;
+
 import javax.persistence.*;
 
+@Loggable
 @Entity(name = "categories")
 public class Category
 {

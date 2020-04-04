@@ -1,8 +1,15 @@
 package com.project.todo.repositories;
 
 import com.project.todo.models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface UserRepository extends JpaRepository<User, Long>
+import java.util.List;
+
+public interface UserRepository extends PagingAndSortingRepository<User, Long>
 {
+    User findByUsername(String username);
+
+    List<User> findByUsernameContainingIgnoreCase(String name,
+                                                  Pageable pageable);
 }
