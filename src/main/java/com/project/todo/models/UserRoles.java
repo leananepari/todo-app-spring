@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "userroles",
         uniqueConstraints = {@UniqueConstraint(columnNames = {"userid", "roleid"})})
-public class UserRoles implements Serializable
+public class UserRoles extends Auditable implements Serializable
 {
     @Id
     @ManyToOne

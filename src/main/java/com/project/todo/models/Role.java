@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Loggable
-@Entity
-@Table(name = "roles")
+@Entity(name = "roles")
 public class Role
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long roleid;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long roleid;
 
     @Column(nullable = false,
             unique = true)
@@ -34,12 +33,12 @@ public class Role
         this.name = name.toUpperCase();
     }
 
-    public long getRoleid()
+    public Long getRoleid()
     {
         return roleid;
     }
 
-    public void setRoleid(long roleid)
+    public void setRoleid(Long roleid)
     {
         this.roleid = roleid;
     }

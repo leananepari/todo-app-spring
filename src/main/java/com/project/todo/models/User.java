@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Loggable
-@Entity(name = "users")
-public class User
+@Entity (name = "users")
+public class User extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,12 +59,11 @@ public class User
         this.userroles = userRoles;
     }
 
-    public long getUserid()
+    public Long getUserid()
     {
         return userid;
     }
-
-    public void setUserid(long userid)
+    public void setUserid(Long userid)
     {
         this.userid = userid;
     }

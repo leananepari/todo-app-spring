@@ -30,9 +30,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                         "/createnewuser")
                 .permitAll()
                 .antMatchers("/users/**",
-                        "/useremails/**",
                         "/oauth/revoke-token",
-                        "/logout")
+                        "/logout",
+                        "/api/**")
                 .authenticated()
                 .antMatchers("/roles/**",
                         "/actuator/**")
