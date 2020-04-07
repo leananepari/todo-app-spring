@@ -25,8 +25,7 @@ public class UserController
     @Autowired
     private UserService userService;
 
-
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
     @GetMapping(value = "/getuserinfo",
             produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(HttpServletRequest request,

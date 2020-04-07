@@ -45,7 +45,7 @@ public class OpenController
     //     "password" : "corgie",
     //     "primaryemail" : "home@local.house"
     // }
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})
