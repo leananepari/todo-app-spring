@@ -22,7 +22,7 @@ public class LogoutController
     @Autowired
     private TokenStore tokenStore;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
+
     @RequestMapping(value = {"/oauth/revoke-token", "/logout"},
             method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)

@@ -26,7 +26,6 @@ public class UserController
     private UserService userService;
 
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping(value = "/getuserinfo",
             produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(HttpServletRequest request,
