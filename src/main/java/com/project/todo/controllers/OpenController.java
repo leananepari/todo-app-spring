@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import springfox.documentation.annotations.ApiIgnore;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 public class OpenController
 {
@@ -45,7 +45,7 @@ public class OpenController
     //     "password" : "corgie",
     //     "primaryemail" : "home@local.house"
     // }
-
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})

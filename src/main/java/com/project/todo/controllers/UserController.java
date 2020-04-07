@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @Loggable
 @RestController
 @RequestMapping("/users")
@@ -26,7 +26,7 @@ public class UserController
     private UserService userService;
 
 
-    // http://localhost:2019/users/getuserinfo
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping(value = "/getuserinfo",
             produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(HttpServletRequest request,

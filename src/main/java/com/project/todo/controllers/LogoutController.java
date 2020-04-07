@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @Controller
 public class LogoutController
 {
@@ -22,6 +22,7 @@ public class LogoutController
     @Autowired
     private TokenStore tokenStore;
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping(value = {"/oauth/revoke-token", "/logout"},
             method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
