@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import springfox.documentation.annotations.ApiIgnore;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class OpenController
 {
