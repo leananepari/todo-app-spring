@@ -17,14 +17,13 @@ public class TaskController
     @Autowired
     private TaskRepository taskRepository;
 
-    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
     @GetMapping(value = "/all/{user_id}")
     public List<Task> getTasksByUser(@PathVariable Integer user_id)
     {
         return taskRepository.findTasks(user_id);
     }
 
-    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
+
     @GetMapping
     @RequestMapping("{id}")
     public Task get(@PathVariable Long id)
@@ -32,7 +31,7 @@ public class TaskController
         return taskRepository.getOne(id);
     }
 
-    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
+
     @PostMapping(value = "/add",
                  consumes = {"application/json"},
                  produces = {"application/json"})
@@ -43,7 +42,7 @@ public class TaskController
         return new ResponseEntity<>(null,  HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
+
     @PutMapping(value = "/update")
     public ResponseEntity<?> updateTask(@RequestBody Task task)
     {
@@ -51,7 +50,7 @@ public class TaskController
         return new ResponseEntity<>(null,  HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = "https://to-do-app-five.now.sh")
+
     @DeleteMapping(value = "/delete/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId)
     {
