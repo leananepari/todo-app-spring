@@ -47,6 +47,7 @@ public class OpenController
     // }
 
 
+    @CrossOrigin
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})
