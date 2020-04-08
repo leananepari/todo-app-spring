@@ -25,7 +25,7 @@ public class UserController
     @Autowired
     private UserService userService;
 
-    @CrossOrigin
+
     @GetMapping(value = "/getuserinfo",
             produces = {"application/json"})
     public ResponseEntity<?> getCurrentUserInfo(HttpServletRequest request,

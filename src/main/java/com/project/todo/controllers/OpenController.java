@@ -46,7 +46,7 @@ public class OpenController
     //     "primaryemail" : "home@local.house"
     // }
 
-    @CrossOrigin
+
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})
