@@ -17,6 +17,7 @@ public class TaskController
     @Autowired
     private TaskRepository taskRepository;
 
+    @CrossOrigin
     @GetMapping(value = "/all/{user_id}")
     public List<Task> getTasksByUser(@PathVariable Integer user_id)
     {
@@ -24,6 +25,7 @@ public class TaskController
     }
 
 
+    @CrossOrigin
     @GetMapping
     @RequestMapping("{id}")
     public Task get(@PathVariable Long id)
@@ -32,6 +34,7 @@ public class TaskController
     }
 
 
+    @CrossOrigin
     @PostMapping(value = "/add",
                  consumes = {"application/json"},
                  produces = {"application/json"})
@@ -42,7 +45,7 @@ public class TaskController
         return new ResponseEntity<>(null,  HttpStatus.CREATED);
     }
 
-
+    @CrossOrigin
     @PutMapping(value = "/update")
     public ResponseEntity<?> updateTask(@RequestBody Task task)
     {
@@ -50,7 +53,7 @@ public class TaskController
         return new ResponseEntity<>(null,  HttpStatus.OK);
     }
 
-
+    @CrossOrigin
     @DeleteMapping(value = "/delete/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable long taskId)
     {
