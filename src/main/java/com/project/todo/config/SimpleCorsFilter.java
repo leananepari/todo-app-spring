@@ -24,37 +24,28 @@ public class SimpleCorsFilter implements Filter
                          ServletResponse res,
                          FilterChain chain) throws IOException, ServletException
     {
-//        HttpServletResponse response = (HttpServletResponse) res;
-//        HttpServletRequest request = (HttpServletRequest) req;
-//        response.setHeader("Access-Control-Allow-Origin",
-//                "*");
-//        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
-//        response.setHeader("Access-Control-Allow-Methods",
-//                "*");
-//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, content-type, access_token");
-//        response.setHeader("Access-Control-Allow-Headers",
-//                "*");
-//        response.setHeader("Access-Control-Max-Age",
-//                "3600");
-//        chain.doFilter(req, res);
-//
-//        if (HttpMethod.OPTIONS.name()
-//                .equalsIgnoreCase(((HttpServletRequest) req).getMethod()))
-//        {
-//            response.setStatus(HttpServletResponse.SC_OK);
-//        } else
-//        {
-//            chain.doFilter(req,
-//                    res);
-//        }
         HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "https://to-do-app-five.now.sh");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization, Origin, Accept, Access-Control-Request-Method, Access-Control-Request-Headers");
+        HttpServletRequest request = (HttpServletRequest) req;
+        response.setHeader("Access-Control-Allow-Origin",
+                "*");
+//        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Methods",
+                "*");
+//        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization, content-type, access_token");
+        response.setHeader("Access-Control-Allow-Headers",
+                "*");
+        response.setHeader("Access-Control-Max-Age",
+                "3600");
 
-        chain.doFilter(req, res);
+        if (HttpMethod.OPTIONS.name()
+                .equalsIgnoreCase(((HttpServletRequest) req).getMethod()))
+        {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else
+        {
+            chain.doFilter(req,
+                    res);
+        }
     }
 
     @Override
