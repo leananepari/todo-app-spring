@@ -90,15 +90,18 @@ public class OpenController
             // return the access token
             RestTemplate restTemplate = new RestTemplate();
             String requestURI = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/login";
+            System.out.println("Debugger requestURI");
 
             List<MediaType> acceptableMediaTypes = new ArrayList<>();
             acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
-
+            System.out.println("Debugger acceptableMediaTypes");
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.setAccept(acceptableMediaTypes);
             headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
                     System.getenv("OAUTHCLIENTSECRET"));
+            
+            System.out.println("Debugger headers");
 
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type",
