@@ -59,6 +59,8 @@ public class OpenController
     {
         logger.trace(httpServletRequest.getMethod()
                 .toUpperCase() + " " + httpServletRequest.getRequestURI() + " accessed");
+        
+        System.out.println("Debugger open controller");
 
         // Create the user
         User newuser = new User();
@@ -84,6 +86,7 @@ public class OpenController
         String theToken = "";
         if (getaccess)
         {
+        	System.out.println("Debugger if getaccess");
             // return the access token
             RestTemplate restTemplate = new RestTemplate();
             String requestURI = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/login";
@@ -116,6 +119,7 @@ public class OpenController
         } else
         {
             // nothing;
+        	System.out.println("Debugger else nothing ");
         }
         return new ResponseEntity<>(theToken,
                 responseHeaders,
