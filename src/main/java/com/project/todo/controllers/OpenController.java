@@ -56,7 +56,7 @@ public class OpenController
                                         @Valid
                                         @RequestBody
                                                 UserMinimum newminuser) throws URISyntaxException
-    {
+    {	
         logger.trace(httpServletRequest.getMethod()
                 .toUpperCase() + " " + httpServletRequest.getRequestURI() + " accessed");
         
@@ -86,6 +86,7 @@ public class OpenController
         String theToken = "";
         if (getaccess)
         {
+        	long startTime = System.nanoTime();
         	System.out.println("Debugger if getaccess");
             // return the access token
             RestTemplate restTemplate = new RestTemplate();
@@ -112,6 +113,7 @@ public class OpenController
                     newminuser.getUsername());
             map.add("password",
                     newminuser.getPassword());
+            System.out.println("Debugger map add");
 
             HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
                     headers);
@@ -119,6 +121,11 @@ public class OpenController
             theToken = restTemplate.postForObject(requestURI,
                     request,
                     String.class);
+            System.out.println("Debugger the token");
+            long endTime = System.nanoTime();
+            long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+            System.out.println("Duration");
+            System.out.println(duration);
         } else
         {
             // nothing;
