@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import springfox.documentation.annotations.ApiIgnore;
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "http://leana2.dev", maxAge = 3600)
 @RestController
 public class OpenController
 {
