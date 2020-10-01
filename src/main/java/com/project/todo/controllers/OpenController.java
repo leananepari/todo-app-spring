@@ -121,6 +121,10 @@ public class OpenController
             // nothing;
         	System.out.println("Debugger else nothing ");
         }
+        System.out.println("Debugger return: ");
+        System.out.println(responseHeaders);
+        System.out.println(theToken);
+        
         return new ResponseEntity<>(theToken,
                 responseHeaders,
                 HttpStatus.CREATED);
