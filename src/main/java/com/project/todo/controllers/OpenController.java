@@ -50,174 +50,172 @@ public class OpenController
     // }
 
 
-//    @PostMapping(value = "/createnewuser",
-//            consumes = {"application/json"},
-//            produces = {"application/json"})
-//    public ResponseEntity<?> addNewUser(HttpServletRequest httpServletRequest,
-//                                        @RequestParam(defaultValue = "true")
-//                                                boolean getaccess,
-//                                        @Valid
-//                                        @RequestBody
-//                                                UserMinimum newminuser) throws URISyntaxException
-//    {	
-//        logger.trace(httpServletRequest.getMethod()
-//                .toUpperCase() + " " + httpServletRequest.getRequestURI() + " accessed");
-//        
-//        System.out.println("Debugger open controller");
-//
-//        // Create the user
-//        User newuser = new User();
-//
-//        newuser.setUsername(newminuser.getUsername());
-//        newuser.setPassword(newminuser.getPassword());
-//        newuser.setPrimaryemail(newminuser.getPrimaryemail());
-//
-//        ArrayList<UserRoles> newRoles = new ArrayList<>();
-//        newRoles.add(new UserRoles(newuser,
-//                roleService.findByName("user")));
-//        newuser.setUserroles(newRoles);
-//
-//        newuser = userService.save(newuser);
-//
-//        // set the location header for the newly created resource - to another controller!
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
-//                .buildAndExpand(newuser.getUserid())
-//                .toUri();
-//        responseHeaders.setLocation(newUserURI);
-//
-//        String theToken = "";
-//        if (getaccess)
-//        {
-//        	long startTime = System.nanoTime();
-//        	System.out.println("Debugger if getaccess");
-//            // return the access token
-//            RestTemplate restTemplate = new RestTemplate();
-//            String requestURI = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/login";
-//            System.out.println("Debugger requestURI");
-//
-//            List<MediaType> acceptableMediaTypes = new ArrayList<>();
-//            acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
-//            System.out.println("Debugger acceptableMediaTypes");
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-//            headers.setAccept(acceptableMediaTypes);
-//            headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
-//                    System.getenv("OAUTHCLIENTSECRET"));
-//            
-//            System.out.println("Debugger headers");
-//
-//            MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-//            map.add("grant_type",
-//                    "password");
-//            map.add("scope",
-//                    "read write trust");
-//            map.add("username",
-//                    newminuser.getUsername());
-//            map.add("password",
-//                    newminuser.getPassword());
-//            System.out.println("Debugger map add");
-//
-//            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
-//                    headers);
-//
-//            theToken = restTemplate.postForObject(requestURI,
-//                    request,
-//                    String.class);
-//            System.out.println("Debugger the token");
-//            long endTime = System.nanoTime();
-//            long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-//            System.out.println("Duration");
-//            System.out.println(duration);
-//        } else
-//        {
-//            // nothing;
-//        	System.out.println("Debugger else nothing ");
-//        }
-//        System.out.println("Debugger return: ");
-//        System.out.println(responseHeaders);
-//        System.out.println(theToken);
-//        
-//        return new ResponseEntity<>(theToken,
-//                responseHeaders,
-//                HttpStatus.CREATED);
-//    }
-    
     @PostMapping(value = "/createnewuser",
             consumes = {"application/json"},
             produces = {"application/json"})
-        public ResponseEntity<?> addSelf(
-            HttpServletRequest httpServletRequest,
-            @Valid
-            @RequestBody
-                UserMinimum newminuser)
-            throws
-            URISyntaxException
-        {
-            // Create the user
-            User newuser = new User();
+    public ResponseEntity<?> addNewUser(HttpServletRequest httpServletRequest,
+                                        @RequestParam(defaultValue = "true")
+                                                boolean getaccess,
+                                        @Valid
+                                        @RequestBody
+                                                UserMinimum newminuser) throws URISyntaxException
+    {	
+        logger.trace(httpServletRequest.getMethod()
+                .toUpperCase() + " " + httpServletRequest.getRequestURI() + " accessed");
+        
+        System.out.println("Debugger open controller");
 
-            newuser.setUsername(newminuser.getUsername());
-            newuser.setPassword(newminuser.getPassword());
-            newuser.setPrimaryemail(newminuser.getPrimaryemail());
+        // Create the user
+        User newuser = new User();
 
-            System.out.println("Debugger new user");
-            ArrayList<UserRoles> newRoles = new ArrayList<>();
-            newRoles.add(new UserRoles(newuser,
-                  roleService.findByName("user")));
-            newuser.setUserroles(newRoles);
+        newuser.setUsername(newminuser.getUsername());
+        newuser.setPassword(newminuser.getPassword());
+        newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
-            newuser = userService.save(newuser);
+        ArrayList<UserRoles> newRoles = new ArrayList<>();
+        newRoles.add(new UserRoles(newuser,
+                roleService.findByName("user")));
+        newuser.setUserroles(newRoles);
 
-            // set the location header for the newly created resource
-            // The location comes from a different controller!
-            HttpHeaders responseHeaders = new HttpHeaders();
-            URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
+        newuser = userService.save(newuser);
+
+        // set the location header for the newly created resource - to another controller!
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
                 .buildAndExpand(newuser.getUserid())
                 .toUri();
-            responseHeaders.setLocation(newUserURI);
-            System.out.println("Debugger response headers");
+        responseHeaders.setLocation(newUserURI);
 
+        String theToken = "";
+        if (getaccess)
+        {
+        	long startTime = System.nanoTime();
+        	System.out.println("Debugger if getaccess");
             // return the access token
-            // To get the access token, surf to the endpoint /login (which is always on the server where this is running)
-            // just as if a client had done this.
             RestTemplate restTemplate = new RestTemplate();
-            String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/login";
-            System.out.println("Debugger rest template");
+            String requestURI = "http://" + httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/login";
+            System.out.println("Debugger requestURI");
 
             List<MediaType> acceptableMediaTypes = new ArrayList<>();
             acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
-
+            System.out.println("Debugger acceptableMediaTypes");
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.setAccept(acceptableMediaTypes);
             headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
-                System.getenv("OAUTHCLIENTSECRET"));
+                    System.getenv("OAUTHCLIENTSECRET"));
+            
             System.out.println("Debugger headers");
 
             MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
             map.add("grant_type",
-                "password");
+                    "password");
             map.add("scope",
-                "read write trust");
+                    "read write trust");
             map.add("username",
-                newminuser.getUsername());
+                    newminuser.getUsername());
             map.add("password",
-                newminuser.getPassword());
+                    newminuser.getPassword());
+            System.out.println("Debugger map add");
 
-            System.out.println("Debugger map");
             HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
-                headers);
+                    headers);
 
-            String theToken = restTemplate.postForObject(requestURI,
-                request,
-                String.class);
-            System.out.println("Debugger request");
-            return new ResponseEntity<>(theToken,
+            theToken = restTemplate.postForObject(requestURI,
+                    request,
+                    String.class);
+            System.out.println("Debugger the token");
+            long endTime = System.nanoTime();
+            long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
+            System.out.println("Duration");
+            System.out.println(duration);
+        } else
+        {
+            // nothing;
+        	System.out.println("Debugger else nothing ");
+        }
+        System.out.println("Debugger return: ");
+        System.out.println(responseHeaders);
+        System.out.println(theToken);
+        
+        return new ResponseEntity<>(theToken,
                 responseHeaders,
                 HttpStatus.CREATED);
     }
     
+//    @PostMapping(value = "/createnewuser",
+//            consumes = {"application/json"},
+//            produces = {"application/json"})
+//        public ResponseEntity<?> addSelf(HttpServletRequest httpServletRequest,
+//                                        @Valid
+//							            @RequestBody UserMinimum newminuser)
+//							            throws
+//							            URISyntaxException
+//        {
+//            // Create the user
+//            User newuser = new User();
+//
+//            newuser.setUsername(newminuser.getUsername());
+//            newuser.setPassword(newminuser.getPassword());
+//            newuser.setPrimaryemail(newminuser.getPrimaryemail());
+//
+//            System.out.println("Debugger new user");
+//            ArrayList<UserRoles> newRoles = new ArrayList<>();
+//            newRoles.add(new UserRoles(newuser,
+//                  roleService.findByName("user")));
+//            newuser.setUserroles(newRoles);
+//
+//            newuser = userService.save(newuser);
+//
+//            // set the location header for the newly created resource
+//            // The location comes from a different controller!
+//            HttpHeaders responseHeaders = new HttpHeaders();
+//            URI newUserURI = ServletUriComponentsBuilder.fromUriString(httpServletRequest.getServerName() + ":" + httpServletRequest.getLocalPort() + "/users/user/{userId}")
+//                .buildAndExpand(newuser.getUserid())
+//                .toUri();
+//            responseHeaders.setLocation(newUserURI);
+//            System.out.println("Debugger response headers");
+//
+//            // return the access token
+//            // To get the access token, surf to the endpoint /login (which is always on the server where this is running)
+//            // just as if a client had done this.
+//            RestTemplate restTemplate = new RestTemplate();
+//            String requestURI = "http://localhost" + ":" + httpServletRequest.getLocalPort() + "/login";
+//            System.out.println("Debugger rest template");
+//
+//            List<MediaType> acceptableMediaTypes = new ArrayList<>();
+//            acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
+//
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+//            headers.setAccept(acceptableMediaTypes);
+//            headers.setBasicAuth(System.getenv("OAUTHCLIENTID"),
+//                System.getenv("OAUTHCLIENTSECRET"));
+//            System.out.println("Debugger headers");
+//
+//            MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+//            map.add("grant_type",
+//                "password");
+//            map.add("scope",
+//                "read write trust");
+//            map.add("username",
+//                newminuser.getUsername());
+//            map.add("password",
+//                newminuser.getPassword());
+//
+//            System.out.println("Debugger map");
+//            HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map,
+//                headers);
+//
+//            String theToken = restTemplate.postForObject(requestURI,
+//                request,
+//                String.class);
+//            System.out.println("Debugger request");
+//            return new ResponseEntity<>(theToken,
+//                responseHeaders,
+//                HttpStatus.CREATED);
+//    }
+//    
     
     @ApiIgnore
     @GetMapping("favicon.ico")
