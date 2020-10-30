@@ -17,8 +17,12 @@ public class Task
     private Timestamp due;
     private boolean completed = false;
     private boolean important = false;
+    private boolean my_day = false;
+    private String note;
+    private Integer list_id_fk;
     private Integer user_id_fk;
     private Integer category_id_fk;
+    
 
     public Task() {
     }
@@ -70,6 +74,30 @@ public class Task
     public void setImportant(boolean important) {
         this.important = important;
     }
+    
+    public boolean getMy_day() {
+    	return my_day;
+    }
+    
+    public void setMy_day(boolean my_day) {
+    	this.my_day = my_day;
+    }
+    
+    public String getNote() {
+    	return note;
+    }
+    
+    public void setNote(String note) {
+    	this.note = note;
+    }
+    
+    public Integer getList_id_fk() {
+    	return list_id_fk;
+    }
+    
+    public void setList_id_fk(Integer list_id_fk) {
+    	this.list_id_fk = list_id_fk;
+    }
 
     public Integer getUser_id_fk() {
         return user_id_fk;
@@ -86,4 +114,5 @@ public class Task
     public void setCategory_id_fk(Integer category_id_fk) {
         this.category_id_fk = category_id_fk;
     }
+    
 }
