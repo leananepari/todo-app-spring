@@ -46,7 +46,8 @@ public class CustomListController {
 			
 			list = customListRepository.save(list);
 			success = true;
-			return new ResponseEntity<>(null, HttpStatus.CREATED);
+			String name = list.getName();
+			return new ResponseEntity<>(name, HttpStatus.CREATED);
 		} finally {
 			if (!success) {
 				while (!success) {
@@ -56,7 +57,8 @@ public class CustomListController {
 						index = index + 1;
 						list = customListRepository.save(list);
 						success = true;
-						return new ResponseEntity<>(null, HttpStatus.CREATED);
+						String name = list.getName();
+						return new ResponseEntity<>(name, HttpStatus.CREATED);
 					} finally {
 						if (!success) {							
 							continue;
