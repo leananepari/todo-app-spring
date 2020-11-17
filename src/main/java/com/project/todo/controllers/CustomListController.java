@@ -39,15 +39,39 @@ public class CustomListController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> create(@RequestBody CustomList list) throws URISyntaxException
     {
-        list = customListRepository.save(list);
-        return new ResponseEntity<>(null,  HttpStatus.CREATED);
+    	boolean success = false;
+    	int index = 1;
+
+		try {
+			
+			list = customListRepository.save(list);
+			success = true;
+			return new ResponseEntity<>(null, HttpStatus.CREATED);
+		} finally {
+			if (!success) {
+				while (!success) {
+					try {
+						String[] arrOfStr = list.getName().split(" ");
+						list.setName(arrOfStr[0] + " (" + Integer.toString(index) + ")");
+						index = index + 1;
+						list = customListRepository.save(list);
+						success = true;
+						return new ResponseEntity<>(null, HttpStatus.CREATED);
+					} finally {
+						if (!success) {							
+							continue;
+						}
+					}
+				}
+			}
+		}
     }
 
     @PutMapping(value = "/update")
     public ResponseEntity<?> updateList(@RequestBody CustomList list)
     {
         list = customListRepository.save(list);
-        return new ResponseEntity<>(null,  HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{listId}")
