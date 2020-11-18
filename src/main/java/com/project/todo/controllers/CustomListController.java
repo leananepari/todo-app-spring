@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin(origins = "http://leana2.dev", maxAge = 3600)
@@ -52,8 +53,24 @@ public class CustomListController {
 			if (!success) {
 				while (!success) {
 					try {
-						String[] arrOfStr = list.getName().trim().split(" ");
-						list.setName(arrOfStr[0] + " (" + Integer.toString(index) + ")");
+						String str = list.getName().trim();
+						if (str.contains(" ")) {
+
+						    String[] arrOfStr = str.split(" ");
+						    String lastItem = arrOfStr[arrOfStr.length - 1];
+						    char c = lastItem.charAt(0);
+						    String s = Character.toString(c);
+						    if (s.equals("(")) {
+						      String[] newArr = Arrays.copyOf(arrOfStr, arrOfStr.length-1);
+						      String joinedString = String.join(" ", newArr);
+						      str = joinedString.trim();
+						    } else {
+						      String joinedString = String.join(" ", arrOfStr);
+						      str = joinedString;
+						    }
+
+						}
+						list.setName(str + " (" + Integer.toString(index) + ")");
 						index = index + 1;
 						list = customListRepository.save(list);
 						success = true;
