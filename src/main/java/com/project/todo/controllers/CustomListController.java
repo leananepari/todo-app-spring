@@ -43,16 +43,16 @@ public class CustomListController {
     	int index = 1;
 
 		try {
-			
+			String name = list.getName().trim();
+			list.setName(name);
 			list = customListRepository.save(list);
 			success = true;
-			String name = list.getName();
 			return new ResponseEntity<>(name, HttpStatus.CREATED);
 		} finally {
 			if (!success) {
 				while (!success) {
 					try {
-						String[] arrOfStr = list.getName().split(" ");
+						String[] arrOfStr = list.getName().trim().split(" ");
 						list.setName(arrOfStr[0] + " (" + Integer.toString(index) + ")");
 						index = index + 1;
 						list = customListRepository.save(list);
