@@ -48,7 +48,7 @@ public class CustomListController {
 			list.setName(name);
 			list = customListRepository.save(list);
 			success = true;
-			return new ResponseEntity<>(name, HttpStatus.CREATED);
+			return new ResponseEntity<>(list, HttpStatus.CREATED);
 		} finally {
 			if (!success) {
 				while (!success) {
@@ -68,14 +68,12 @@ public class CustomListController {
 						      String joinedString = String.join(" ", arrOfStr);
 						      str = joinedString;
 						    }
-
 						}
 						list.setName(str + " (" + Integer.toString(index) + ")");
 						index = index + 1;
 						list = customListRepository.save(list);
 						success = true;
-						String name = list.getName();
-						return new ResponseEntity<>(name, HttpStatus.CREATED);
+						return new ResponseEntity<>(list, HttpStatus.CREATED);
 					} finally {
 						if (!success) {							
 							continue;
@@ -90,7 +88,7 @@ public class CustomListController {
     public ResponseEntity<?> updateList(@RequestBody CustomList list)
     {
         list = customListRepository.save(list);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{listId}")

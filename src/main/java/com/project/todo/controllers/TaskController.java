@@ -43,7 +43,7 @@ public class TaskController
     public ResponseEntity<?> create(@RequestBody Task task) throws URISyntaxException
     {
         task = taskRepository.save(task);
-        return new ResponseEntity<>(null,  HttpStatus.CREATED);
+        return new ResponseEntity<>(task,  HttpStatus.CREATED);
     }
 
 
@@ -51,7 +51,7 @@ public class TaskController
     public ResponseEntity<?> updateTask(@RequestBody Task task)
     {
         task = taskRepository.save(task);
-        return new ResponseEntity<>(null,  HttpStatus.OK);
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
 
